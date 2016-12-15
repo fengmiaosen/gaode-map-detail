@@ -102,7 +102,7 @@ function getDataPromise(urlList) {
         // 批量请求接口一次最大支持20个
         $.ajax({
             type: "POST",
-            url: 'http://restapi.amap.com/v3/batch?key=dc43f8a62c68a793e228515d43281ed1',
+            url: 'https://restapi.amap.com/v3/batch?key=dc43f8a62c68a793e228515d43281ed1',
             data: JSON.stringify(data),
             dataType: 'json',
             headers: {
