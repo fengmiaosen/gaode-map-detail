@@ -1,15 +1,15 @@
 /**
- * Created by fengmiaosen on 2016/12/12.
+ * Created by fengmiaosen on 2016/12/24.
  */
-var mapObj = null;
-var MAX_LEN = 20;
+let mapObj = null;
+let MAX_LEN = 20;
 
 function setSize() {
-    var leftBox = $('.left-box');
-    var inputBox = $('.input-box');
-    var resBox = $('.result-box');
-    var ptop = 10;
-    var h =  leftBox.innerHeight() - inputBox.outerHeight(true) - ptop;
+    let leftBox = $('.left-box');
+    let inputBox = $('.input-box');
+    let resBox = $('.result-box');
+    let ptop = 10;
+    let h = leftBox.innerHeight() - inputBox.outerHeight(true) - ptop;
 
     resBox.outerHeight(h);
 }
@@ -18,7 +18,7 @@ function initialize() {
     setSize();
 
     // 创建地图
-    var pos = new AMap.LngLat(116.397428, 39.90923);
+    let pos = new AMap.LngLat(116.397428, 39.90923);
 
     mapObj = new AMap.Map("container", {
         resizeEnable: true,
@@ -27,7 +27,7 @@ function initialize() {
         rotation: 0 //设置地图旋转角度
     }); //创建地图实例
 
-    var scale = new AMap.Scale({
+    let scale = new AMap.Scale({
             visible: true
         }),
         toolBar = new AMap.ToolBar({
@@ -49,20 +49,20 @@ function initialize() {
 function poiRecomDetailInfo() {
     mapObj.clearMap();
 
-    var text = document.getElementById('poi_text').value;
-    var poilist = text.split(";");
+    let text = document.getElementById('poi_text').value;
+    let poilist = text.split(";");
 
-    var urlList = poilist.map(function (value, index, array) {
+    let urlList = poilist.map(function (value, index, array) {
         return {
             url: '/v3/place/detail?key=dc43f8a62c68a793e228515d43281ed1&id=' + value
         }
     });
 
     // 请求批量接口
-    var plist = [];
+    let plist = [];
 
-    for (var i = 0,len = Math.ceil(urlList.length / MAX_LEN); i < len; i++) {
-        var p = getDataPromise(urlList.slice(MAX_LEN * i, MAX_LEN * (i + 1)));
+    for (let i = 0, len = Math.ceil(urlList.length / MAX_LEN); i < len; i++) {
+        let p = getDataPromise(urlList.slice(MAX_LEN * i, MAX_LEN * (i + 1)));
         plist.push(p);
     }
 
@@ -73,14 +73,14 @@ function poiRecomDetailInfo() {
 
             if (res && res.length > 0) {
                 // forEach方法
-                // var list = [];
+                // let list = [];
 
                 // res.forEach(function (item, index) {
                 //     list = list.concat(item);
                 // });
 
-                 // 使用reduce方法
-                var list = res.reduce(function (pvalue, cvalue) {
+                // 使用reduce方法
+                let list = res.reduce(function (pvalue, cvalue) {
                     return pvalue.concat(cvalue);
                 });
 
@@ -96,8 +96,8 @@ function poiRecomDetailInfo() {
 function getDataPromise(urlList) {
 
     return new Promise(function (resolve, reject) {
-        var urlArray = urlList.length > MAX_LEN ? urlList.slice(0, MAX_LEN) : urlList;
-        var data = {ops: urlArray};
+        let urlArray = urlList.length > MAX_LEN ? urlList.slice(0, MAX_LEN) : urlList;
+        let data = {ops: urlArray};
 
         // 批量请求接口一次最大支持20个
         $.ajax({
@@ -122,24 +122,24 @@ function getDataPromise(urlList) {
 }
 
 function renderData(data) {
-    var mkrs = [];
-    var resultBox = document.getElementById("recom_result");
+    let mkrs = [];
+    let resultBox = document.getElementById("recom_result");
 
     data.forEach(function (item, i) {
-        var ret = item.body;
+        let ret = item.body;
 
         if (typeof ret == 'object' && ret.pois && ret.pois[0]) {
-            var poi = ret.pois[0];
-            var xy = poi.location.split(",");
-            var x = xy[0];
-            var y = xy[1];
-            var mkr = addMarkerOnePoint(x, y, i + 1, poi.id, poi.name);
+            let poi = ret.pois[0];
+            let xy = poi.location.split(",");
+            let x = xy[0];
+            let y = xy[1];
+            let mkr = addMarkerOnePoint(x, y, i + 1, poi.id, poi.name);
             mkrs.push(mkr);
         }
     });
     mapObj.setFitView(mkrs);
 
-    var html = template('result_list', {
+    let html = template('result_list', {
         list: data
     });
 
@@ -152,29 +152,26 @@ function renderData(data) {
 
 //实例化点标记
 function addMarkerOnePoint(lng, lat, i, pid, pname) {
-    // var index = i%10;
-    var index = i;
+    // let index = i%10;
+    let index = i;
 
-    var icon = "http://webapi.amap.com/images/" + index + ".png"
-    var marker = new AMap.Marker({
+    let icon = "http://webapi.amap.com/images/" + index + ".png"
+    let marker = new AMap.Marker({
         // icon: icon,
         position: new AMap.LngLat(lng, lat),
         zIndex: i
     });
 
     // 自定义点标记内容
-    var mkrHtml = template('mkr', {
+    let mkrHtml = template('mkr', {
         index: i
     });
-    var cont = $(mkrHtml).get(0);
+    let cont = $(mkrHtml).get(0);
 
     marker.setContent(cont); //更新点标记内容
-
     marker.setMap(mapObj);  //在地图上添加点
 
     return marker;
 }
 
-$(document).ready(function () {
-    initialize();
-});
+initialize();

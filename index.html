@@ -1,71 +1,16 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AMap poi detail</title>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AMap poi detail</title>
 
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/index.css">
+        <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=dc43f8a62c68a793e228515d43281ed1&plugin=AMap.Scale,AMap.OverView,AMap.ToolBar"></script>
 
-    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=dc43f8a62c68a793e228515d43281ed1&plugin=AMap.Scale,AMap.OverView,AMap.ToolBar"></script>
-
-</head>
-
-<body>
-
-<div class="main-box">
-
-    <div class='left-box'>
-        <div class="input-box">
-            <label class="label label-info">poi推荐列表</label>
-            <textarea id="poi_text" class="textarea" placeholder="B0FFFVXWVH;B01740OJCN;B0FFG9VQD2" value='B0FFFVXWVH;B01740OJCN;B0FFG9VQD2'>B0FFFVXWVH;B01740OJCN;B0FFG9VQD2</textarea>
-            <button class="btn btn-primary" id="poi_search" >查看详情</button>
-        </div>
-
-        <div class="result-box">
-            <div id="r_title" class="label label-primary">推荐列表详情:</div>
-            <div id="recom_result"></div>
-        </div>
-    </div>
-    <div id="container" class='right-box'></div>
-</div>
-
-<span class="email-tag">email: miaosen.fms@alibaba-inc.com</span>
-
-<script type="text/javascript" src="jquery/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="js/template.js"></script>
-
-<script type="text/javascript" src="js/index.js"></script>
-
-<script type="text/html" id="result_list">
-    {{if list}}
-    {{each list as item i}}
-    <ul class="list-group res-ul">
-        {{if item.body && item.body.pois && item.body.pois[0]}}
-        <li class="list-group-item"><span>序号:</span>{{i+1}}</li>
-        <li class="list-group-item"><span>名称:</span>{{item.body.pois[0].name}}</li>
-        <li class="list-group-item"><span>ID:</span>{{item.body.pois[0].id}}</li>
-        <li class="list-group-item"><span>经纬度:</span>{{item.body.pois[0].location}}</li>
-        <li class="list-group-item"><span>new_type_code:</span>{{item.body.pois[0].type}}</li>
-        {{else}}
-        <li class="list-group-item">序号:{{i+1}}</li>
-        <li class="list-group-item">{{item.body.toString()}}</li>
-        {{/if}}
-    </ul>
-    {{/each}}
-    {{/if}}
-</script>
-
-<script type="text/html" id="mkr">
-    <div class="my-mkr">
-        <img src="http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png" alt="{{index}}" class="mkr-img"><span
-            class="mkr-txt">{{index}}</span>
-    </div>
-</script>
-
-</body>
-
+    </head>
+    <body>
+        <div id="app"></div>
+        <script src="./dist/build.js"></script>
+    </body>
 </html>

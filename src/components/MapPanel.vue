@@ -1,0 +1,40 @@
+<template>
+    <div id="container" class='right-box'></div>
+</template>
+
+<script>
+
+    export default{
+        name: 'map-panel',
+        data(){
+            return{
+                container: 'container'
+            }
+        },
+        mounted() {
+            let pos = new AMap.LngLat(116.397428, 39.90923);
+
+            let mapObj = new AMap.Map(this.container, {
+                resizeEnable: true,
+                center: pos, //创建中心点坐标
+                zoom: 14, //设置地图缩放级别
+                rotation: 0 //设置地图旋转角度
+            }); //创建地图实例
+
+            let scale = new AMap.Scale({
+                    visible: true
+                }),
+                toolBar = new AMap.ToolBar({
+                    visible: true
+                }),
+                overView = new AMap.OverView({
+                    visible: true
+                });
+            mapObj.addControl(scale);
+            mapObj.addControl(toolBar);
+            mapObj.addControl(overView);
+        },
+        components:{
+        }
+    }
+</script>
