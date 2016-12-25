@@ -18,18 +18,17 @@
                 ids: 'B0FFFVXWVH;B01740OJCN;B0FFG9VQD2'
             }
         },
-        components: {},
-        computed: {
-        },
         methods: {
             setIds(){
+                this.ids = this.ids.startsWith(';') ? this.ids.slice(this.ids.indexOf(';') + 1) : this.ids;
+
                 this.ids = this.ids.endsWith(';') ? this.ids.slice(0, this.ids.lastIndexOf(';')) : this.ids;
 
-                console.log('new ids:', this.ids);
+//                console.log('new ids:', this.ids);
             },
             searchPoi(){
                 fetchData(this.ids, list => {
-                    this.onSubmit(this.ids, list);
+                    this.onSubmit(list);
                 });
             }
         }

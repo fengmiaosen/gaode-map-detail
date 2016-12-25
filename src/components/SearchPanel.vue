@@ -1,6 +1,6 @@
 <template>
     <div class='left-box'>
-        <search-box :onSubmit = "getIds"></search-box>
+        <search-box :onSubmit = "getData"></search-box>
         <search-list :poiList ="list"></search-list>
     </div>
 </template>
@@ -9,6 +9,7 @@
     import SearchList from './SearchList.vue';
 
     export default{
+        props: ['search'],
         data(){
             return{
                 ids: '',
@@ -20,10 +21,10 @@
             SearchList
         },
         methods: {
-            getIds(ids, list){
-                this.ids = ids;
+            getData(list){
                 this.list = list;
-                console.log('panel list:', this.list);
+                this.search(this.list);
+//                console.log('panel list:', this.list);
             }
         }
     }
