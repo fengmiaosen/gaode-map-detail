@@ -7,11 +7,10 @@
 </template>
 
 <script>
-
+    import {EventMgr, SEARCH_EVENT} from '../util/EventMgr';
     import {fetchData} from '../util/request';
 
     export default{
-        props: ['onSubmit'],
         data(){
             return {
                 title: 'poi推荐列表',
@@ -28,7 +27,8 @@
             },
             searchPoi(){
                 fetchData(this.ids, list => {
-                    this.onSubmit(list);
+//                    console.log('box:', list);
+                    EventMgr.$emit(SEARCH_EVENT, list);
                 });
             }
         }

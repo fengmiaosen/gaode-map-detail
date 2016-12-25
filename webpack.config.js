@@ -8,6 +8,12 @@ module.exports = {
         publicPath: '/dist/',
         filename: 'build.js'
     },
+    resolve: {
+        extensions: ['.js', '.vue'],
+        alias: {
+            vue: 'vue/dist/vue.js' //webpack打包时，需要设置别名
+        }
+    },
     module: {
         loaders: [{
             test: /\.js$/,
@@ -19,7 +25,11 @@ module.exports = {
         }, {
             test: /\.css$/,
             exclude: /^node_modules$/,
-            loader: 'style-loader!css-loader'
+            loader: [
+                'style-loader',
+                'css-loader',
+                'postcss-loader'
+            ]
         }, {
             test: /\.vue$/,
             loader: 'vue-loader'
@@ -31,13 +41,8 @@ module.exports = {
             }
         }]
     },
-    resolve: {
-        extensions: ['.js', '.vue'],
-        alias: {
-            vue: 'vue/dist/vue.js' //webpack打包时，需要设置别名
-        }
-    },
-    plugins: [],
+    plugins: [
+    ],
     devServer: {
         historyApiFallback: true,
         noInfo: true

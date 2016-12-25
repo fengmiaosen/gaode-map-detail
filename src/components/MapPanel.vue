@@ -3,10 +3,10 @@
 </template>
 
 <script>
-//    import {addMarker} from '../util/Marker';
+    import {EventMgr, SEARCH_EVENT} from '../util/EventMgr';
+    import {addMarker} from '../util/Marker';
 
     export default{
-        props: ['list', 'getMap'],
         data(){
             return{
                 container: 'container',
@@ -15,10 +15,7 @@
         },
         mounted() {
             this.initMap();
-//            this.renderMkr(this.map, this.list);
-        },
-        updated(){
-//            this.renderMkr(this.map, this.list);
+            this.renderMkr();
         },
         methods: {
             initMap() {
@@ -45,12 +42,12 @@
                 mapObj.addControl(overView);
 
                 this.map = mapObj;
-                this.getMap(mapObj);
             },
             renderMkr() {
-//                if(this.list && this.list.length > 0) {
-//                    addMarker(this.map, this.list);
-//                }
+                EventMgr.$on(SEARCH_EVENT, (list) => {
+//                    console.log('add mkr:', list);
+                    addMarker(this.map, list);
+                });
             }
         }
     }
