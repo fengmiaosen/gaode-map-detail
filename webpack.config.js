@@ -37,7 +37,15 @@ module.exports = {
             vue: 'vue/dist/vue.js' //webpack打包时，需要设置别名
         }
     },
-    plugins: []
+    plugins: [],
+    devServer: {
+        historyApiFallback: true,
+        noInfo: true
+    },
+    performance: {
+        hints: false
+    },
+    devtool: '#eval-source-map'
 };
 
 if (process.env.NODE_ENV === 'production') {
