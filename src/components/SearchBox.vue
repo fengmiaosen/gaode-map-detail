@@ -1,12 +1,15 @@
 <template>
     <div class="input-box">
         <label class="label label-info">{{title}}</label>
-        <textarea id="poi_text" class="textarea" placeholder="ids" v-model="ids"></textarea>
+        <textarea id="poi_text" class="textarea" placeholder="ids" v-model="ids" @change="setIds"></textarea>
         <button class="btn btn-primary" id="poi_search" @click="searchPoi">查看详情</button>
     </div>
 </template>
 
 <script>
+
+    import {fetchData} from '../util/request';
+
     export default{
         props: ['onSubmit'],
         data(){
@@ -16,9 +19,18 @@
             }
         },
         components: {},
+        computed: {
+        },
         methods: {
+            setIds(){
+                this.ids = this.ids.endsWith(';') ? this.ids.slice(0, this.ids.lastIndexOf(';')) : this.ids;
+
+                console.log('new ids:', this.ids);
+            },
             searchPoi(){
-                this.onSubmit(this.ids);
+                fetchData(this.ids, list => {
+                    this.onSubmit(this.ids, list);
+                });
             }
         }
     }

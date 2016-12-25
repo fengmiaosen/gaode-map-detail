@@ -1,7 +1,7 @@
 <template>
     <div class='left-box'>
         <search-box :onSubmit = "getIds"></search-box>
-        <search-list :ids ="ids"></search-list>
+        <search-list :poiList ="list"></search-list>
     </div>
 </template>
 <script>
@@ -11,7 +11,8 @@
     export default{
         data(){
             return{
-                ids: ''
+                ids: '',
+                list: []
             }
         },
         components:{
@@ -19,9 +20,10 @@
             SearchList
         },
         methods: {
-            getIds(ids){
+            getIds(ids, list){
                 this.ids = ids;
-                console.log('ids:', this.ids);
+                this.list = list;
+                console.log('panel list:', this.list);
             }
         }
     }

@@ -2,9 +2,9 @@
     <div class="result-box">
         <div id="r_title" class="label label-primary">推荐列表详情:</div>
         <div id="recom_result">
-            <ul class="list-group res-ul"  v-for="(item,index) in list" v-if="item">
+            <ul class="list-group res-ul"  v-for="(item,index) in poiList" v-if="item">
 
-                <template v-if="item">
+                <template v-if="item && item.body && item.body.pois && item.body.pois[0]">
                     <li class="list-group-item">
                         <span>序号:</span>{{index+1}}
                     </li>
@@ -26,7 +26,7 @@
                         <span>序号:</span>{{index+1}}
                     </li>
                     <li class="list-group-item">
-                        <span>名称:</span>{{item.body.pois[0].name}}
+                        <span>名称:</span>{{item.body.toString()}}
                     </li>
                 </template>
             </ul>
@@ -37,18 +37,8 @@
 <script>
 
     export default{
-        props: ['ids'],
-        data(){
-            return{
-                list: []
-            }
-        },
-        computed: {
-            getPoi(){
-
-            }
-        },
-        components:{
-        }
+        props: ['poiList'],
+        computed: {},
+        components:{}
     }
 </script>
