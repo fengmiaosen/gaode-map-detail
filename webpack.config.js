@@ -8,7 +8,7 @@ module.exports = {
     entry: {
         main: path.resolve(__dirname, 'src/app.js'),
         // 将vue核心库抽取出来
-        vendor: 'vue'
+        vendor: ['vue', 'axios']
     },
     output: {
         path: path.resolve(__dirname, './dist'),
