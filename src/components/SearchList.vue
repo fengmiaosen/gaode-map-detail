@@ -50,8 +50,6 @@
             });
         },
         computed: {
-            getPoi(){
-            }
         },
         components:{}
     }

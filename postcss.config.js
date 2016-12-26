@@ -1,9 +1,12 @@
 /**
- * Created by fengmiaosen on 2016/12/25.
+ * Created by fengmiaosen on 2016/12/26.
  */
+
+const autoprefixer = require('autoprefixer');
+
 module.exports = {
     plugins: [
-        require('autoprefixer')({
+        autoprefixer({
             /* ...options */
             "browserslist": [
                 "> 1%",
@@ -11,4 +14,4 @@ module.exports = {
             ]
         })
     ]
-}
+};

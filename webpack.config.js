@@ -1,5 +1,6 @@
 const webpack = require('webpack'); //to access built-in plugins
 const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: path.resolve(__dirname, 'src/index.js'),
@@ -15,13 +16,18 @@ module.exports = {
         }
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.js$/,
             exclude: '/^node_modules$/',
             loader: 'babel-loader'
         }, {
             test: /\.scss$/,
-            loader: 'style-loader!css-loader!sass-loader'
+            loader: [
+                'style-loader',
+                'css-loader',
+                'postcss-loader',
+                'sass-loader'
+            ]
         }, {
             test: /\.css$/,
             exclude: /^node_modules$/,
@@ -32,7 +38,15 @@ module.exports = {
             ]
         }, {
             test: /\.vue$/,
-            loader: 'vue-loader'
+            loader: 'vue-loader',
+            options: {
+                loaders: {
+                    // 生产环境执行
+                    // css: ExtractTextPlugin.extract({
+                    //     loader: 'css-loader'
+                    // })
+                }
+            }
         }, {
             test: /\.(png|jpg|gif|svg|ttf|eot|woff)$/,
             loader: 'file-loader',
@@ -41,8 +55,7 @@ module.exports = {
             }
         }]
     },
-    plugins: [
-    ],
+    plugins: [],
     devServer: {
         historyApiFallback: true,
         noInfo: true
@@ -70,6 +83,7 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
-        })
+        }),
+        // new ExtractTextPlugin("style.css")
     ])
 }
