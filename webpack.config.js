@@ -34,7 +34,9 @@ module.exports = {
                 loader: 'css-loader'
             }, {
                 loader: 'postcss-loader',
-                options: {}
+                options: {
+
+                }
             }, {
                 loader: 'sass-loader'
             }]
@@ -77,9 +79,10 @@ module.exports = {
     performance: {
         hints: false
     },
-    devtool: '#eval-source-map'
+    devtool: '#cheap-module-eval-source-map'
 };
 
+// 生产环节配置
 if (process.env.NODE_ENV === 'production') {
     // Use ExtractTextPlugin to extract CSS into a single file
     // so it's applied on initial render.
@@ -108,8 +111,7 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
-        }),
+        })
 
-        // new ExtractTextPlugin("style.[hash].css")
     ]);
 }
