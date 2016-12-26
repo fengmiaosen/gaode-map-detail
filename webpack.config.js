@@ -1,6 +1,8 @@
 const webpack = require('webpack'); //to access built-in plugins
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const vueConfig = require('./vue-loader.config');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src/index.js'),
@@ -22,31 +24,31 @@ module.exports = {
             loader: 'babel-loader'
         }, {
             test: /\.scss$/,
-            loader: [
-                'style-loader',
-                'css-loader',
-                'postcss-loader',
-                'sass-loader'
-            ]
+            use: [{
+                loader: 'style-loader'
+            }, {
+                loader: 'css-loader'
+            }, {
+                loader: 'postcss-loader',
+                options: {}
+            }, {
+                loader: 'sass-loader'
+            }]
         }, {
             test: /\.css$/,
             exclude: /^node_modules$/,
-            loader: [
-                'style-loader',
-                'css-loader',
-                'postcss-loader'
-            ]
+            use: [{
+                loader: 'style-loader'
+            }, {
+                loader: 'css-loader'
+            }, {
+                loader: 'postcss-loader',
+                options: {}
+            }]
         }, {
             test: /\.vue$/,
             loader: 'vue-loader',
-            options: {
-                loaders: {
-                    // 生产环境执行
-                    // css: ExtractTextPlugin.extract({
-                    //     loader: 'css-loader'
-                    // })
-                }
-            }
+            options: vueConfig
         }, {
             test: /\.(png|jpg|gif|svg|ttf|eot|woff)$/,
             loader: 'file-loader',
@@ -67,7 +69,26 @@ module.exports = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
+    // Use ExtractTextPlugin to extract CSS into a single file
+    // so it's applied on initial render.
+    // vueConfig is already included in the config via LoaderOptionsPlugin
+    // here we overwrite the loader config for <style lang="stylus">
+    // so they are extracted.
+    vueConfig.loaders = {
+        scss: ExtractTextPlugin.extract({
+            loader: [
+                'style-loader',
+                'css-loader',
+                'postcss-loader',
+                'sass-loader'
+            ]
+        }),
+        css: ExtractTextPlugin.extract({
+            loader: 'css-loader'
+        })
+    };
+
+    module.exports.devtool = '#source-map';
     // http://vue-loader.vuejs.org/en/workflow/production.html
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
@@ -84,6 +105,6 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.LoaderOptionsPlugin({
             minimize: true
         }),
-        // new ExtractTextPlugin("style.css")
-    ])
+        new ExtractTextPlugin("style.[hash].css")
+    ]);
 }
