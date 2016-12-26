@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const vueConfig = require('./build/vue-loader.config.js');
 
 module.exports = {
-    entry: path.resolve(__dirname, 'src/index.js'),
+    entry: path.resolve(__dirname, 'src/app.js'),
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
