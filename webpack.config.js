@@ -5,11 +5,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const vueConfig = require('./build/vue-loader.config.js');
 
 module.exports = {
-    entry: path.resolve(__dirname, 'src/app.js'),
+    entry: {
+        main: path.resolve(__dirname, 'src/app.js'),
+        // 将vue核心库抽取出来
+        vendor: 'vue'
+    },
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
-        filename: 'build.js'
+        filename: '[name].js'
     },
     resolve: {
         extensions: ['.js', '.vue'],
@@ -58,6 +62,9 @@ module.exports = {
         }]
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor' // Specify the common bundle's name.
+        }),
         // new HtmlWebpackPlugin({
         //     filename: 'dist/index.html',
         //     template: 'src/index.template.html'
@@ -80,17 +87,9 @@ if (process.env.NODE_ENV === 'production') {
     // here we overwrite the loader config for <style lang="stylus">
     // so they are extracted.
     vueConfig.loaders = {
-        scss: ExtractTextPlugin.extract({
-            loader: [
-                'style-loader',
-                'css-loader',
-                'postcss-loader',
-                'sass-loader'
-            ]
-        }),
-        css: ExtractTextPlugin.extract({
-            loader: 'css-loader'
-        })
+        // css: ExtractTextPlugin.extract({
+        //     loader: 'css-loader'
+        // })
     };
 
     module.exports.devtool = '#source-map';
@@ -110,6 +109,7 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.LoaderOptionsPlugin({
             minimize: true
         }),
+
         // new ExtractTextPlugin("style.[hash].css")
     ]);
 }
