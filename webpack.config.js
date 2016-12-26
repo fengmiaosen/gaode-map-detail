@@ -1,8 +1,8 @@
 const webpack = require('webpack'); //to access built-in plugins
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const vueConfig = require('./vue-loader.config');
-const autoprefixer = require('autoprefixer');
+const vueConfig = require('./build/vue-loader.config.js');
+// const autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src/index.js'),
