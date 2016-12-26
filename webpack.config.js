@@ -1,8 +1,8 @@
 const webpack = require('webpack'); //to access built-in plugins
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const vueConfig = require('./build/vue-loader.config.js');
-// const autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src/index.js'),
@@ -57,7 +57,12 @@ module.exports = {
             }
         }]
     },
-    plugins: [],
+    plugins: [
+        // new HtmlWebpackPlugin({
+        //     filename: 'dist/index.html',
+        //     template: 'src/index.template.html'
+        // })
+    ],
     devServer: {
         historyApiFallback: true,
         noInfo: true
@@ -105,11 +110,6 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.LoaderOptionsPlugin({
             minimize: true
         }),
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: ["vue"],
-        //     filename:"vue.js",//忽略则以name为输出文件的名字，否则以此为输出文件名字
-        //     // minChunks:2
-        // }),
-        new ExtractTextPlugin("style.[hash].css")
+        // new ExtractTextPlugin("style.[hash].css")
     ]);
 }
