@@ -2,6 +2,9 @@
   "name": "gaode-map-detail",
   "version": "1.0.0",
   "description": "高德地图API批量查询poi",
+  "engines": {
+    "node": ">= 6"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot --port 8088",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"

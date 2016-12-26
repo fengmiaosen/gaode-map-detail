@@ -105,6 +105,11 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.LoaderOptionsPlugin({
             minimize: true
         }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: ["vue"],
+        //     filename:"vue.js",//忽略则以name为输出文件的名字，否则以此为输出文件名字
+        //     // minChunks:2
+        // }),
         new ExtractTextPlugin("style.[hash].css")
     ]);
 }
