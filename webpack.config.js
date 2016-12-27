@@ -7,17 +7,19 @@ const vueConfig = require('./build/vue-loader.config.js');
 module.exports = {
     entry: {
         main: path.resolve(__dirname, 'src/app.js'),
-        // 将vue核心库抽取出来
+        // 将vue等基础依赖库抽取出来
         vendor: ['vue', 'axios']
     },
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
         filename: '[name].js'
+        // filename: '[name]-[chunkhash:6].js'
     },
     resolve: {
         extensions: ['.js', '.vue'],
         alias: {
+            components: path.resolve(__dirname, './src/components'),
             vue: 'vue/dist/vue.js' //webpack打包时，需要设置别名
         }
     },

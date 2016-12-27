@@ -4,7 +4,6 @@
 
 <script>
     import {EventMgr, SEARCH_EVENT} from '../util/EventMgr';
-    import {addMarker} from '../util/Marker';
 
     export default{
         data(){
@@ -45,8 +44,10 @@
             },
             renderMkr() {
                 EventMgr.$on(SEARCH_EVENT, (list) => {
-//                    console.log('add mkr:', list);
-                    addMarker(this.map, list);
+                    let map = this.map;
+                    import('../util/Marker.js').then(module => {
+                        module.addMarker(map, list);
+                    });
                 });
             }
         }
