@@ -19,6 +19,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.vue'],
         alias: {
+            util: path.resolve(__dirname, './src/util'),
             components: path.resolve(__dirname, './src/components'),
             vue: 'vue/dist/vue.js' //webpack打包时，需要设置别名
         }

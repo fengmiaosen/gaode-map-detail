@@ -3,7 +3,8 @@
 </template>
 
 <script>
-    import {EventMgr, SEARCH_EVENT} from '../util/EventMgr';
+    import {EventMgr, SEARCH_EVENT} from 'util/EventMgr';
+//    import {addMarker} from 'util/Marker';
 
     export default{
         data(){
@@ -45,8 +46,11 @@
             renderMkr() {
                 EventMgr.$on(SEARCH_EVENT, (list) => {
                     let map = this.map;
-                    import('../util/Marker.js').then(module => {
+                    // TODO => webpack2 代码分割，目前编译后在线访问路径不对
+                    import('util/Marker.js').then(module => {
                         module.addMarker(map, list);
+                    }).catch(err => {
+                        console.log("Chunk loading failed.", err);
                     });
                 });
             }
