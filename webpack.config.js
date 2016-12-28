@@ -98,7 +98,10 @@ if (process.env.NODE_ENV === 'production') {
         // })
     };
 
-    module.exports.output.publicPath = '/gaode-map-detail/dist/';
+    module.exports.output = Object.assign(module.exports.output, {
+        publicPath: '/gaode-map-detail/dist/',
+        chunkFilename: '[name].chunk.js?[chunkhash:8]',
+    });
 
     module.exports.devtool = '#source-map';
     // http://vue-loader.vuejs.org/en/workflow/production.html
