@@ -7,8 +7,8 @@
 </template>
 
 <script>
-    import {EventMgr, SEARCH_EVENT} from '../util/EventMgr';
-    import {fetchData} from '../util/request';
+    import {EventMgr, SEARCH_EVENT} from 'util/EventMgr';
+    import {fetchData} from 'util/request';
 
     export default{
         data(){
@@ -27,7 +27,6 @@
             },
             searchPoi(){
                 fetchData(this.ids, list => {
-//                    console.log('box:', list);
                     EventMgr.$emit(SEARCH_EVENT, list);
                 });
             }

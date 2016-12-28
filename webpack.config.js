@@ -12,7 +12,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist'),
-        publicPath: '/gaode-map-detail/dist/',
+        publicPath: '/dist/',
         filename: '[name].js'
         // filename: '[name]-[chunkhash:6].js'
     },
@@ -97,6 +97,8 @@ if (process.env.NODE_ENV === 'production') {
         //     loader: 'css-loader'
         // })
     };
+
+    module.exports.output.publicPath = '/gaode-map-detail/dist/';
 
     module.exports.devtool = '#source-map';
     // http://vue-loader.vuejs.org/en/workflow/production.html

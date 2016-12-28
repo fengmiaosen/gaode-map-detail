@@ -45,7 +45,8 @@
             renderMkr() {
                 EventMgr.$on(SEARCH_EVENT, (list) => {
                     let map = this.map;
-                    // TODO => webpack2 代码分割，目前编译后在线访问路径不对
+
+                    // webpack2 代码分割，需要明确配置publicPath
                     import('util/Marker.js').then(module => {
                         module.addMarker(map, list);
                     }).catch(err => {

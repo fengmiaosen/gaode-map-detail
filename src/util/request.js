@@ -2,7 +2,6 @@
  * Created by fengmiaosen on 2016/12/25.
  */
 import axios from 'axios';
-
 const MAX_LEN = 20;
 
 function getDataPromise(urlList) {
@@ -10,9 +9,9 @@ function getDataPromise(urlList) {
     return new Promise(function (resolve, reject) {
         const urlArray = urlList.length > MAX_LEN ? urlList.slice(0, MAX_LEN) : urlList;
         const data = {ops: urlArray};
+        // 批量请求接口一次最大支持20个
         const url = 'https://restapi.amap.com/v3/batch?key=dc43f8a62c68a793e228515d43281ed1';
 
-        // 批量请求接口一次最大支持20个
         axios
             .post(url, data)
             .then(res => {
@@ -53,7 +52,6 @@ export function fetchData(ids, callback) {
                     return pvalue.concat(cvalue);
                 });
 
-                // console.log('list:', list);
                 callback && callback(list);
             }
         })

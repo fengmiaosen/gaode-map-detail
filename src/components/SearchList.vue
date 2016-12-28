@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    import {EventMgr, SEARCH_EVENT} from '../util/EventMgr';
+    import {EventMgr, SEARCH_EVENT} from 'util/EventMgr';
 
     export default{
         data() {
