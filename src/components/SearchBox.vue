@@ -1,11 +1,36 @@
 <template>
     <div class="input-box">
         <label class="label label-info">{{title}}</label>
-        <textarea id="poi_text" class="textarea" placeholder="ids" v-model="ids" @change="setIds"></textarea>
+        <textarea class="input-text-area" placeholder="ids" v-model="ids" @change="setIds"></textarea>
         <button class="btn btn-primary" id="poi_search" @click="searchPoi">查看详情</button>
     </div>
 </template>
+<style lang="sass" scoped>
+    .input-box {
+        padding-top: 10px;
+        padding-left: 10px;
+        box-sizing: border-box;
 
+        label {
+            text-align: left;
+        }
+
+        .btn {
+            margin: 10px auto;
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .input-text-area {
+        width: 100%;
+        height: 100px;
+        max-width: 100%;
+        display: block;
+        padding: 10px;
+        margin: 10px 0 ;
+    }
+</style>
 <script>
     import {EventMgr, SEARCH_EVENT} from 'util/EventMgr';
     import {fetchData} from 'util/request';

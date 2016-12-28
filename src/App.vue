@@ -5,7 +5,15 @@
         <copy-right></copy-right>
     </div>
 </template>
-<style>
+<style lang="sass" scoped>
+
+    .main-box {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
 
 </style>
 <script>
