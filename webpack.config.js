@@ -13,7 +13,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
-        filename: '[name].js',
+        filename: '[name].js?[chunkhash:8]',
         chunkFilename: '[name].chunk.js?[chunkhash:8]',//给require.ensure用
     },
     resolve: {
@@ -110,7 +110,7 @@ if (process.env.NODE_ENV === 'local') {
     ]);
 }
 
-// 生产环节配置
+// 生产环境配置
 if (process.env.NODE_ENV === 'production') {
     // Use ExtractTextPlugin to extract CSS into a single file
     // so it's applied on initial render.
@@ -143,6 +143,10 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
+        }),
+        new HtmlWebpackPlugin({
+            filename: '../index_build.html',
+            template: 'src/index.template.html'
         })
 
     ]);
