@@ -4,7 +4,6 @@
 
 <script>
     import {EventMgr, SEARCH_EVENT} from 'util/EventMgr';
-//    import {addMarker} from 'util/Marker';
 
     export default{
         data(){

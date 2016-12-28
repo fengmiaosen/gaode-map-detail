@@ -12,7 +12,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/',
+        publicPath: '/gaode-map-detail/dist/',
         filename: '[name].js'
         // filename: '[name]-[chunkhash:6].js'
     },
