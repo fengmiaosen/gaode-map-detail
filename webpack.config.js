@@ -14,7 +14,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
         filename: '[name].js',
-        chunkFilename: "[name].chunk.js"//给require.ensure用
+        chunkFilename: '[name].chunk.js?[chunkhash:8]',//给require.ensure用
     },
     resolve: {
         extensions: ['.js', '.vue'],
@@ -69,11 +69,7 @@ module.exports = {
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor' // Specify the common bundle's name.
-        }),
-        // new HtmlWebpackPlugin({
-        //     filename: 'dist/index.html',
-        //     template: 'src/index.template.html'
-        // })
+        })
     ],
     devServer: {
         historyApiFallback: true,
@@ -84,6 +80,35 @@ module.exports = {
     },
     devtool: '#cheap-module-eval-source-map'
 };
+
+// 本地服务器调试编译配置
+if (process.env.NODE_ENV === 'local') {
+    module.exports.output = Object.assign(module.exports.output, {
+        path: path.resolve(__dirname, './local'),
+        publicPath: './',
+    });
+    module.exports.devtool = '#source-map';
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"local"'
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'src/index.template.html'
+        })
+    ]);
+}
 
 // 生产环节配置
 if (process.env.NODE_ENV === 'production') {
@@ -100,7 +125,6 @@ if (process.env.NODE_ENV === 'production') {
 
     module.exports.output = Object.assign(module.exports.output, {
         publicPath: '/gaode-map-detail/dist/',
-        chunkFilename: '[name].chunk.js?[chunkhash:8]',
     });
 
     module.exports.devtool = '#source-map';

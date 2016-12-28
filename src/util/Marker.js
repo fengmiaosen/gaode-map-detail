@@ -9,7 +9,7 @@ function addMarkerOnePoint(lng, lat, index) {
     });
 
     // 自定义点标记内容
-    let html = `<div class="my-mkr"><img src="//webapi.amap.com/theme/v1.3/markers/n/mark_r.png" alt="${index}" class="mkr-img"><span class="mkr-txt">${index}</span></div>`;
+    let html = `<div class="my-mkr"><img src="https://webapi.amap.com/theme/v1.3/markers/n/mark_r.png" alt="${index}" class="mkr-img"><span class="mkr-txt">${index}</span></div>`;
 
     marker.setContent(html); //更新点标记内容
 
