@@ -39,7 +39,7 @@ h2 {
 .left-box {
 	padding: 0 10px 0 0;
 	height: 100%;
-	width: 25%;
+	width: 30%;
 	overflow-x: hidden;
 	overflow-y: auto;
 }
@@ -70,34 +70,6 @@ h2 {
 	width: 100%;
 }
 
-.result-box {
-	padding: 10px;
-	overflow: auto;
-	box-sizing: border-box;
-}
-
-.res-ul {
-	border:2px solid #f2f2f4;
-	margin: 10px 0 0;
-	padding: 0;
-}
-
-.res-ul li{
-	list-style: none;
-	padding: 5px;
-	border-top: 1px solid #f2f2f4;
-}
-.res-ul li span {
-	margin-right: 5px;
-	font-weight:bold;
-	color: #0354f9;
-}
-.res-ul li:first-child {
-	color:red;
-}
-.res-ul li:nth-child(2n) {
-	background: #f2f2f4;
-}
 
 .my-mkr {
 	font-size: 15px;
