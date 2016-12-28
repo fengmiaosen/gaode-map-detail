@@ -13,7 +13,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
-        filename: '[name].js?[chunkhash:8]',
+        filename: '[name].js',
         chunkFilename: '[name].chunk.js?[chunkhash:8]',//给require.ensure用
     },
     resolve: {
@@ -83,8 +83,9 @@ module.exports = {
 
 // 本地服务器调试编译配置
 if (process.env.NODE_ENV === 'local') {
-    module.exports.output = Object.assign(module.exports.output, {
+    module.exports.output = Object.assign({}, module.exports.output, {
         path: path.resolve(__dirname, './local'),
+        filename: '[name].js?[chunkhash:8]',
         publicPath: './',
     });
     module.exports.devtool = '#source-map';
@@ -123,7 +124,8 @@ if (process.env.NODE_ENV === 'production') {
         // })
     };
 
-    module.exports.output = Object.assign(module.exports.output, {
+    module.exports.output = Object.assign({}, module.exports.output, {
+        filename: '[name].js?[chunkhash:8]',
         publicPath: '/gaode-map-detail/dist/',
     });
 
