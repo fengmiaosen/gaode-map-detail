@@ -13,8 +13,8 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
-        filename: '[name].js'
-        // filename: '[name]-[chunkhash:6].js'
+        filename: '[name].js',
+        chunkFilename: "[name].chunk.js"//给require.ensure用
     },
     resolve: {
         extensions: ['.js', '.vue'],
