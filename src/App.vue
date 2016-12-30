@@ -5,7 +5,7 @@
         <copy-right></copy-right>
     </div>
 </template>
-<style lang="sass" scoped>
+<style rel="stylesheet/scss" lang="sass" scoped>
 
     .main-box {
         display: flex;
