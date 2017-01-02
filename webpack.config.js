@@ -3,6 +3,8 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const vueConfig = require('./build/vue-loader.config.js');
+// webpack dev server 调试面板
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
     entry: {
@@ -69,7 +71,8 @@ module.exports = {
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor' // Specify the common bundle's name.
-        })
+        }),
+        new DashboardPlugin()
     ],
     devServer: {
         historyApiFallback: true,
