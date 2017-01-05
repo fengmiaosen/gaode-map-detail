@@ -3,10 +3,11 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const vueConfig = require('./build/vue-loader.config.js');
-// webpack dev server 调试面板
+// webpack dev server 图形化调试面板
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
+    // entry & chunk 从概念上可以简单的理解为一个入口、一个出口
     entry: {
         main: path.resolve(__dirname, 'src/app.js'),
         // 将vue等基础依赖库抽取出来
@@ -16,7 +17,8 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         publicPath: '/dist/',
         filename: '[name].js',
-        chunkFilename: '[name].chunk.js?[chunkhash:8]',//给require.ensure用
+        // 使用require.ensure或者import()打包出来的normal chunk的命名
+        chunkFilename: '[name].chunk.js?[chunkhash:8]',
     },
     resolve: {
         extensions: ['.js', '.vue'],
@@ -70,7 +72,12 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor' // Specify the common bundle's name.
+            // Specify the common bundle's name.，也可以使用names字段
+            // name: 'vendor'
+
+            // vendor是包括公共的第三方代码，此处包括vue、axios基础库，可以称为initial chunk
+            // manifest.js是包括webpack运行时runtime的块，可以称为entry chunk
+            names: ['vendor', 'manifest']
         }),
         new DashboardPlugin()
     ],
