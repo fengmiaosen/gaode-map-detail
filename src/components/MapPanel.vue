@@ -46,7 +46,7 @@
                 EventMgr.$on(SEARCH_EVENT, (list) => {
                     let map = this.map;
 
-                    // webpack2 代码分割，需要明确配置publicPath
+                    // Babel stage-2规范支持， webpack2 代码分割，需要明确配置publicPath
                     import('util/Marker.js').then(module => {
                         module.addMarker(map, list);
                     }).catch(err => {
