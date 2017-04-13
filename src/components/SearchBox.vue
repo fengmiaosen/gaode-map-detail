@@ -5,7 +5,7 @@
         <button class="btn btn-primary" id="poi_search" @click="searchPoi">查看详情</button>
     </div>
 </template>
-<style rel="stylesheet/scss" lang="sass" scoped>
+<style lang="scss" scoped>
     .input-box {
         padding-top: 10px;
         padding-left: 10px;

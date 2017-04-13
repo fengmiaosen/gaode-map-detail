@@ -6,7 +6,7 @@
         </div>
     </div>
 </template>
-<style lang="sass" scoped>
+<style lang="scss" scoped>
     .result-box {
         padding: 10px;
         overflow: auto;

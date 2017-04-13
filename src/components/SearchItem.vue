@@ -34,7 +34,7 @@
         </div>
     </div>
 </template>
-<style rel="stylesheet/scss" lang="sass" scoped>
+<style lang="scss" scoped>
     .result-item {
         display: flex;
         box-sizing: border-box;
